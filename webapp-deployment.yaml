@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: webapp
+  name: webapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapp
+  template:
+    metadata:
+      labels:
+        app: webapp
+    spec:
+      containers:
+        - image: ahhmedhs/project-webapp
+          name: webapp
+          env:
+            - name: eureka-server
+              value: "eureka-server"
+          ports:
+            - containerPort: 4200
+      restartPolicy: Always

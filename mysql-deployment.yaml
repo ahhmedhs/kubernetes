@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: mysql
+  name: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - env:
+            - name: MYSQL_ALLOW_EMPTY_PASSWORD
+              value: "yes"
+            - name: MYSQL_ROOT_PASSWORD
+              value: "Password"
+            - name: MYSQL_USERNAME
+              value: 'root'
+            - name: MYSQL_DATABASE
+              value: 'virtualmedicine'  
+          image: mysql:latest
+          name: mysql
+          ports:
+            - containerPort: 3306
+      restartPolicy: Always

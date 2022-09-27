@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: user-service
+  name: user-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-service
+  template:
+    metadata:
+      labels:
+        app: user-service
+    spec:
+      containers:
+        - image: ahhmedhs/project-user-service
+          name: user-service
+          env:
+            - name: eureka-server
+              value: eureka-server
+          ports:
+            - containerPort: 8081
+      restartPolicy: Always

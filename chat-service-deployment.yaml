@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+     app: chat-service
+  name: chat-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chat-service
+  template:
+    metadata:
+      labels:
+        app: chat-service
+    spec:
+      containers:
+        - image: ahhmedhs/project-chat-service
+          name: chat-service
+          env:
+            - name: eureka-server
+              value: "eureka-server"
+          ports:
+            - containerPort: 8070
+      restartPolicy: Always

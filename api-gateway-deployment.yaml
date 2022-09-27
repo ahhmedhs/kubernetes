@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: api-gateway      
+  name: api-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-gateway
+  template:
+    metadata:
+      labels:
+        app: api-gateway
+    spec:
+      containers:
+        - image: ahhmedhs/project-api-gateway
+          name: api-gateway
+          env:
+            - name: eureka-server
+              value: "eureka-server"
+          ports:
+            - containerPort: 8080
+      restartPolicy: Always
